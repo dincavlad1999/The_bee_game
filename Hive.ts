@@ -4,11 +4,13 @@ import { InsectType } from "./InsectType";
 import { Queen } from "./Queen";
 import { Worker } from "./Worker";
 
-class Hive {
+export class Hive {
   private insects: Insect[] = [];
   private static instance: Hive | null = null;
 
-  private constructor() {}
+  private constructor() {
+    this.initializeHiveSwarm();
+  }
 
   public static createHive() {
     if (Hive.instance === null) {
@@ -17,7 +19,11 @@ class Hive {
     return Hive.instance;
   }
 
-  public initializeHiveSwarm(): void {
+  public getInsects(): Insect[] {
+    return this.insects;
+  }
+
+  private initializeHiveSwarm(): void {
     this.insects = [];
     for (let index = 0; index < 8; index++) {
       this.insects = [...this.insects, this.createInsect(InsectType.DRONE)];
@@ -28,9 +34,12 @@ class Hive {
         this.insects = [...this.insects, this.createInsect(InsectType.QUEEN)];
       }
     }
+    this.insects.sort(
+      (insectA, insectB) => insectB.getHealth() - insectA.getHealth()
+    );
   }
 
-  private isGameOver(): boolean {
+  public isGameOver(): boolean {
     if (this.isQueenDead() || !this.isSomeBeeAlive()) return true;
     return false;
   }
