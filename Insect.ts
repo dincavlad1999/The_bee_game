@@ -5,7 +5,7 @@ export abstract class Insect {
     this.healthPoints = healthPoints;
   }
 
-  get getHealth(): number {
+  getHealth(): number {
     return this.healthPoints;
   }
 
