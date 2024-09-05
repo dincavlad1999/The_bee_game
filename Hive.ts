@@ -1,8 +1,8 @@
-import { Drone } from "./Drone";
-import { Insect } from "./Insect";
-import { InsectType } from "./InsectType";
-import { Queen } from "./Queen";
-import { Worker } from "./Worker";
+import { Drone } from "./Drone.js";
+import { Insect } from "./Insect.js";
+import { InsectType } from "./InsectType.js";
+import { Queen } from "./Queen.js";
+import { Worker } from "./Worker.js";
 
 export class Hive {
   private insects: Insect[] = [];

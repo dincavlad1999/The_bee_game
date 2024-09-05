@@ -1,7 +1,9 @@
-import { Hive } from "./Hive";
+import { Hive } from "./Hive.js";
 
-function hitTheHive() {
-  var hive: Hive = Hive.createHive();
+console.log("Sunt in Main.");
+
+function hitTheHive(): void {
+  let hive: Hive = Hive.createHive();
   console.log(hive.isGameOver());
   console.log(hive.getInsects());
 }
