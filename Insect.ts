@@ -9,5 +9,5 @@ export abstract class Insect {
     return this.healthPoints;
   }
 
-  abstract takeDamage(damage: number): void;
+  abstract takeDamage(): void;
 }
