@@ -27,22 +27,31 @@ function initializeBeeGame(): void {
         beeQueenFigure.style.display = "inline-block";
         let beeQueenFigcaption: HTMLElement =
           document.createElement("figcaption");
-        beeQueenFigcaption.textContent = `Queen - ${insect.getHealth()}HP`;
+        beeQueenFigcaption.textContent = `Queen (${insect.getHealth()}HP)`;
         let beeQueenImage: HTMLImageElement = document.createElement("img");
         beeQueenImage.setAttribute("src", "./resources/queen_bee.jpg");
         beeQueenImage.setAttribute("beeIndex", `${index}`);
         beeQueenImage.style.cursor = "pointer";
         beeQueenImage.style.width = "100px";
         beeQueenImage.style.height = "100px";
-        beeQueenImage.style.border = "1px solid black";
+
         beeQueenImage.style.margin = "3px";
         beeQueenImage.style.position = "relative";
-        const initialZIndex = getComputedStyle(beeQueenImage).zIndex;
+        const initialZIndexImage = getComputedStyle(beeQueenImage).zIndex;
+        const initialZIndexFigcaption =
+          getComputedStyle(beeQueenFigcaption).zIndex;
         beeQueenImage.addEventListener("click", (event: MouseEvent) => {
+          beeQueenFigcaption.textContent = "-8 HP";
+          beeQueenFigcaption.style.color = "red";
+          beeQueenFigcaption.style.zIndex = "2";
+          beeQueenFigcaption.style.transform = "translate(20px, 20px)";
           beeQueenImage.style.zIndex = "2";
           beeQueenImage.style.transform = "translate(20px, 20px)";
           beeQueenImage.setAttribute("src", "./resources/hurt_queen_bee.jpg");
           setTimeout(() => {
+            beeQueenFigcaption.style.color = "inherit";
+            beeQueenFigcaption.style.transform = "translate(0px, 0px)";
+            beeQueenFigcaption.textContent = `Queen (${insect.getHealth()}HP)`;
             beeQueenImage.style.transform = "translate(0px, 0px)";
             if (insect.getHealth() > 0) {
               beeQueenImage.setAttribute("src", "./resources/queen_bee.jpg");
@@ -50,7 +59,7 @@ function initializeBeeGame(): void {
               beeQueenImage.setAttribute("src", "./resources/dead_bee.jpg");
             }
             beeQueenImage.style.zIndex =
-              initialZIndex === "auto" ? "1" : initialZIndex; // Reset to initial z-index
+              initialZIndexImage === "auto" ? "1" : initialZIndexImage; // Reset to initial z-index
           }, 1000);
         });
         beeQueenFigure.appendChild(beeQueenImage);
@@ -62,22 +71,31 @@ function initializeBeeGame(): void {
         beeDroneFigure.style.display = "inline-block";
         let beeDroneFigcaption: HTMLElement =
           document.createElement("figcaption");
-        beeDroneFigcaption.textContent = `Drone - ${insect.getHealth()}HP`;
+        beeDroneFigcaption.textContent = `Drone (${insect.getHealth()}HP)`;
         let beeDroneImage: HTMLImageElement = document.createElement("img");
         beeDroneImage.setAttribute("src", "./resources/drone_bee.jpg");
         beeDroneImage.setAttribute("beeIndex", `${index}`);
         beeDroneImage.style.cursor = "pointer";
         beeDroneImage.style.width = "100px";
         beeDroneImage.style.height = "100px";
-        beeDroneImage.style.border = "1px solid black";
+
         beeDroneImage.style.margin = "3px";
         beeDroneImage.style.position = "relative"; // Ensure position is not static
-        const initialZIndex = getComputedStyle(beeDroneImage).zIndex;
+        const initialZIndexImage = getComputedStyle(beeDroneImage).zIndex;
+        const initialZIndexFigcaption =
+          getComputedStyle(beeDroneFigcaption).zIndex;
         beeDroneImage.addEventListener("click", (event: MouseEvent) => {
+          beeDroneFigcaption.textContent = "-12 HP";
+          beeDroneFigcaption.style.color = "red";
+          beeDroneFigcaption.style.zIndex = "2";
+          beeDroneFigcaption.style.transform = "translate(20px, 20px)";
           beeDroneImage.style.zIndex = "2";
           beeDroneImage.style.transform = "translate(20px, 20px)";
           beeDroneImage.setAttribute("src", "./resources/hurt_bee.jpg");
           setTimeout(() => {
+            beeDroneFigcaption.style.color = "inherit";
+            beeDroneFigcaption.style.transform = "translate(0px, 0px)";
+            beeDroneFigcaption.textContent = `Drone (${insect.getHealth()}HP)`;
             beeDroneImage.style.transform = "translate(0px, 0px)";
             if (insect.getHealth() > 0) {
               beeDroneImage.setAttribute("src", "./resources/drone_bee.jpg");
@@ -85,7 +103,7 @@ function initializeBeeGame(): void {
               beeDroneImage.setAttribute("src", "./resources/dead_bee.jpg");
             }
             beeDroneImage.style.zIndex =
-              initialZIndex === "auto" ? "1" : initialZIndex; // Reset to initial z-index
+              initialZIndexImage === "auto" ? "1" : initialZIndexImage; // Reset to initial z-index
           }, 1000);
         });
         beeDroneFigure.appendChild(beeDroneImage);
@@ -97,22 +115,31 @@ function initializeBeeGame(): void {
         beeWorkerFigure.style.display = "inline-block";
         let beeWorkerFigcaption: HTMLElement =
           document.createElement("figcaption");
-        beeWorkerFigcaption.textContent = `Worker - ${insect.getHealth()}HP`;
+        beeWorkerFigcaption.textContent = `Worker (${insect.getHealth()}HP)`;
         let beeWorkerImage: HTMLImageElement = document.createElement("img");
         beeWorkerImage.setAttribute("src", "resources/worker_bee.jpg");
         beeWorkerImage.setAttribute("beeIndex", `${index}`);
         beeWorkerImage.style.cursor = "pointer";
         beeWorkerImage.style.width = "100px";
         beeWorkerImage.style.height = "100px";
-        beeWorkerImage.style.border = "1px solid black";
+
         beeWorkerImage.style.margin = "3px";
         beeWorkerImage.style.position = "relative"; // Ensure position is not static
-        const initialZIndex = getComputedStyle(beeWorkerImage).zIndex;
+        const initialZIndexImage = getComputedStyle(beeWorkerImage).zIndex;
+        const initialZIndexFigcaption =
+          getComputedStyle(beeWorkerFigcaption).zIndex;
         beeWorkerImage.addEventListener("click", (event: MouseEvent) => {
+          beeWorkerFigcaption.textContent = "-10 HP";
+          beeWorkerFigcaption.style.color = "red";
+          beeWorkerFigcaption.style.zIndex = "2";
+          beeWorkerFigcaption.style.transform = "translate(20px, 20px)";
           beeWorkerImage.style.zIndex = "2";
           beeWorkerImage.style.transform = "translate(20px, 20px)";
           beeWorkerImage.setAttribute("src", "./resources/hurt_bee.jpg");
           setTimeout(() => {
+            beeWorkerFigcaption.style.color = "inherit";
+            beeWorkerFigcaption.style.transform = "translate(0px, 0px)";
+            beeWorkerFigcaption.textContent = `Worker (${insect.getHealth()}HP)`;
             beeWorkerImage.style.transform = "translate(0px, 0px)";
             if (insect.getHealth() > 0) {
               beeWorkerImage.setAttribute("src", "resources/worker_bee.jpg");
@@ -120,7 +147,7 @@ function initializeBeeGame(): void {
               beeWorkerImage.setAttribute("src", "resources/dead_bee.jpg");
             }
             beeWorkerImage.style.zIndex =
-              initialZIndex === "auto" ? "1" : initialZIndex; // Reset to initial z-index
+              initialZIndexImage === "auto" ? "1" : initialZIndexImage; // Reset to initial z-index
           }, 1000);
         });
         beeWorkerFigure.appendChild(beeWorkerImage);
