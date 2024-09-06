@@ -4,27 +4,27 @@ import { InsectType } from "./InsectType.js";
 import { Queen } from "./Queen.js";
 import { Worker } from "./Worker.js";
 
-export class Hive {
+export class BeeGame {
   private insects: Insect[] = [];
-  private static instance: Hive | null = null;
+  private static instance: BeeGame | null = null;
 
   private constructor() {
     //Aici o sa initializez din Session storage daca este cazul sau daca nu apelez functia asta.
-    this.initializeHiveSwarm();
+    this.initializeBeeGameSwarm();
   }
 
-  public static createHive() {
-    if (Hive.instance === null) {
-      Hive.instance = new Hive();
+  public static createBeeGame() {
+    if (BeeGame.instance === null) {
+      BeeGame.instance = new BeeGame();
     }
-    return Hive.instance;
+    return BeeGame.instance;
   }
 
   public getInsects(): Insect[] {
     return this.insects;
   }
 
-  private initializeHiveSwarm(): void {
+  private initializeBeeGameSwarm(): void {
     this.insects = [];
     for (let index = 0; index < 8; index++) {
       this.insects = [...this.insects, this.createInsect(InsectType.DRONE)];
@@ -92,7 +92,7 @@ export class Hive {
       console.log("Attacked Bee after damage hp: ", attackedBee.getHealth());
       if (this.isGameOver()) {
         alert("Game Over");
-        this.initializeHiveSwarm();
+        this.initializeBeeGameSwarm();
       } else {
         //Update the insects and Session Storage etc
         this.insects = this.insects.filter(

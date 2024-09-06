@@ -1,15 +1,15 @@
 import { Drone } from "./Drone.js";
-import { Hive } from "./Hive.js";
+import { BeeGame } from "./BeeGame.js";
 import { Queen } from "./Queen.js";
 import { Worker } from "./Worker.js";
-const hive = Hive.createHive();
-initializeHive();
-function initializeHive() {
-    console.log("Am inceput sa initializez Hive-ul;");
+const beeGame = BeeGame.createBeeGame();
+initializeBeeGame();
+function initializeBeeGame() {
+    console.log("Am inceput sa initializez BeeGame-ul;");
     let hiveContainerReference = document.getElementById("hive-container");
     if (hiveContainerReference) {
-        const hiveInsects = hive.getInsects();
-        hiveInsects.forEach((insect, index) => {
+        const BeeGameInsects = beeGame.getInsects();
+        BeeGameInsects.forEach((insect, index) => {
             if (insect instanceof Queen) {
                 let beeQueen = document.createElement("img");
                 beeQueen.setAttribute("src", "./resources/queen_bee.jpg");
@@ -107,7 +107,7 @@ function initializeHive() {
     }
 }
 function attackBee(beeIndex) {
-    let attackedInsect = hive
+    let attackedInsect = beeGame
         .getInsects()
         .find((insect, index) => beeIndex === index);
     if (attackedInsect) {
@@ -117,7 +117,7 @@ function attackBee(beeIndex) {
     }
 }
 function attackSwarm() {
-    hive.attackBee();
+    beeGame.attackBee();
 }
 document.querySelector("button")?.addEventListener("click", attackSwarm);
 //Observatie: De facut o albina sa se incarce cum avem pe shopfloor pentru window.load event

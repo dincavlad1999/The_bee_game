@@ -1,24 +1,24 @@
 import { Drone } from "./Drone.js";
-import { Hive } from "./Hive.js";
+import { BeeGame } from "./BeeGame.js";
 import { Insect } from "./Insect.js";
 import { Queen } from "./Queen.js";
 import { Worker } from "./Worker.js";
 
-const hive: Hive = Hive.createHive();
+const beeGame: BeeGame = BeeGame.createBeeGame();
 
-initializeHive();
+initializeBeeGame();
 
-function initializeHive(): void {
-  console.log("Am inceput sa initializez Hive-ul;");
+function initializeBeeGame(): void {
+  console.log("Am inceput sa initializez BeeGame-ul;");
 
   let hiveContainerReference: HTMLDivElement | null = document.getElementById(
     "hive-container"
   ) as HTMLDivElement | null;
 
   if (hiveContainerReference) {
-    const hiveInsects: Insect[] = hive.getInsects();
+    const beeGameInsects: Insect[] = beeGame.getInsects();
 
-    hiveInsects.forEach((insect: Insect, index: number) => {
+    beeGameInsects.forEach((insect: Insect, index: number) => {
       if (insect instanceof Queen) {
         let beeQueen: HTMLImageElement = document.createElement("img");
         beeQueen.setAttribute("src", "./resources/queen_bee.jpg");
@@ -111,7 +111,7 @@ function initializeHive(): void {
 }
 
 function attackBee(beeIndex: number): void {
-  let attackedInsect: Insect | undefined = hive
+  let attackedInsect: Insect | undefined = beeGame
     .getInsects()
     .find((insect: Insect, index: number) => beeIndex === index);
   if (attackedInsect) {
@@ -122,7 +122,7 @@ function attackBee(beeIndex: number): void {
 }
 
 function attackSwarm(): void {
-  hive.attackBee();
+  beeGame.attackBee();
 }
 document.querySelector("button")?.addEventListener("click", attackSwarm);
 
