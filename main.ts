@@ -5,14 +5,19 @@ import { Queen } from "./Queen.js";
 import { Worker } from "./Worker.js";
 
 const beeGame: BeeGame = BeeGame.createBeeGame();
+const hiveContainerReference: HTMLDivElement | null = document.getElementById(
+  "hive-container"
+) as HTMLDivElement | null;
 document.querySelector("button")?.addEventListener("click", attackSwarm);
 
 initializeBeeGame();
 
 function initializeBeeGame(): void {
-  let hiveContainerReference: HTMLDivElement | null = document.getElementById(
-    "hive-container"
-  ) as HTMLDivElement | null;
+  if (hiveContainerReference && hiveContainerReference.hasChildNodes()) {
+    while (hiveContainerReference.firstChild) {
+      hiveContainerReference.removeChild(hiveContainerReference.firstChild);
+    }
+  }
 
   if (hiveContainerReference) {
     beeGame.getInsects().forEach((insect: Insect, index: number) => {
@@ -29,7 +34,7 @@ function initializeBeeGame(): void {
         const initialZIndex = getComputedStyle(beeQueen).zIndex;
         beeQueen.addEventListener("click", (event: MouseEvent) => {
           beeQueen.style.zIndex = "2";
-          beeQueen.style.transform = "translate(100px, 100px)";
+          beeQueen.style.transform = "translate(20px, 20px)";
           beeQueen.setAttribute("src", "./resources/hurt_queen_bee.jpg");
           setTimeout(() => {
             beeQueen.style.transform = "translate(0px, 0px)";
@@ -56,7 +61,7 @@ function initializeBeeGame(): void {
         const initialZIndex = getComputedStyle(beeDrone).zIndex;
         beeDrone.addEventListener("click", (event: MouseEvent) => {
           beeDrone.style.zIndex = "2";
-          beeDrone.style.transform = "translate(100px, 100px)";
+          beeDrone.style.transform = "translate(20px, 20px)";
           beeDrone.setAttribute("src", "./resources/hurt_bee.jpg");
           setTimeout(() => {
             beeDrone.style.transform = "translate(0px, 0px)";
@@ -83,7 +88,7 @@ function initializeBeeGame(): void {
         const initialZIndex = getComputedStyle(beeWorker).zIndex;
         beeWorker.addEventListener("click", (event: MouseEvent) => {
           beeWorker.style.zIndex = "2";
-          beeWorker.style.transform = "translate(100px, 100px)";
+          beeWorker.style.transform = "translate(20px, 20px)";
           beeWorker.setAttribute("src", "./resources/hurt_bee.jpg");
           setTimeout(() => {
             beeWorker.style.transform = "translate(0px, 0px)";
@@ -106,15 +111,26 @@ function initializeBeeGame(): void {
 
 function attackSwarm(): void {
   const randomBeeIndex: number = beeGame.getRandomBeeIndex();
-  beeGame.attackBee(randomBeeIndex);
-  const beeReference: HTMLImageElement | null = document.querySelector(
-    `[beeIndex="${randomBeeIndex}"]`
-  ) as HTMLImageElement | null;
-  if (beeReference) {
-    beeReference.click();
-  } else {
-    throw new Error(`Bee with index ${randomBeeIndex} not found in the DOM`);
-  }
+  beeGame
+    .attackBee(randomBeeIndex)
+    .then((isAttackedBeeKilled: boolean) => {
+      const beeReference: HTMLImageElement | null = document.querySelector(
+        `[beeIndex="${randomBeeIndex}"]`
+      ) as HTMLImageElement | null;
+      if (beeReference) {
+        beeReference.click();
+        if (isAttackedBeeKilled) {
+          setTimeout(() => {
+            initializeBeeGame();
+          }, 3000);
+        }
+      } else {
+        console.error(`Bee with index ${randomBeeIndex} not found in the DOM`);
+      }
+    })
+    .catch((error) => {
+      console.error("Error in attackBee:", error);
+    });
 }
 
 //Observatie: De facut o albina sa se incarce cum avem pe shopfloor pentru window.load event

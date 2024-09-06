@@ -67,24 +67,29 @@ export class BeeGame {
         return Math.floor(Math.random() * this.insects.length);
     }
     attackBee(randomBeeIndex) {
-        let attackedBee = this.insects.find((insect, beeIndex) => {
-            return beeIndex === randomBeeIndex;
-        });
-        if (attackedBee) {
-            console.log("Attacked Bee before damage hp: ", attackedBee.getHealth());
-            attackedBee.takeDamage();
-            console.log("Attacked Bee after damage hp: ", attackedBee.getHealth());
-            if (this.isGameOver()) {
-                alert("Game Over");
-                this.initializeBeeGameSwarm();
+        return new Promise((resolve, reject) => {
+            let attackedBee = this.insects.find((insect, beeIndex) => {
+                return beeIndex === randomBeeIndex;
+            });
+            if (attackedBee) {
+                console.log("Attacked Bee before damage hp: ", attackedBee.getHealth());
+                attackedBee.takeDamage();
+                let isAttackedBeeKilled = attackedBee.getHealth() < 0 ? true : false;
+                console.log("Attacked Bee after damage hp: ", attackedBee.getHealth());
+                if (this.isGameOver()) {
+                    alert("Game Over");
+                    this.initializeBeeGameSwarm();
+                    resolve(isAttackedBeeKilled);
+                }
+                else {
+                    //Update the insects and Session Storage etc
+                    this.insects = this.insects.filter((insect) => insect.getHealth() > 0);
+                    resolve(isAttackedBeeKilled);
+                }
             }
             else {
-                //Update the insects and Session Storage etc
-                this.insects = this.insects.filter((insect) => insect.getHealth() > 0);
+                reject(new Error("No bee with the generated index found."));
             }
-        }
-        else {
-            throw new Error("No bee with the generated index found.");
-        }
+        });
     }
 }
