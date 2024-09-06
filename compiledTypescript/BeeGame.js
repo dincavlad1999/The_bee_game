@@ -66,8 +66,7 @@ export class BeeGame {
         }
         return Math.floor(Math.random() * this.insects.length);
     }
-    attackBee() {
-        let randomBeeIndex = this.getRandomBeeIndex();
+    attackBee(randomBeeIndex) {
         let attackedBee = this.insects.find((insect, beeIndex) => {
             return beeIndex === randomBeeIndex;
         });

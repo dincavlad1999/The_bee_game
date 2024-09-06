@@ -3,13 +3,12 @@ import { BeeGame } from "./BeeGame.js";
 import { Queen } from "./Queen.js";
 import { Worker } from "./Worker.js";
 const beeGame = BeeGame.createBeeGame();
+document.querySelector("button")?.addEventListener("click", attackSwarm);
 initializeBeeGame();
 function initializeBeeGame() {
-    console.log("Am inceput sa initializez BeeGame-ul;");
     let hiveContainerReference = document.getElementById("hive-container");
     if (hiveContainerReference) {
-        const BeeGameInsects = beeGame.getInsects();
-        BeeGameInsects.forEach((insect, index) => {
+        beeGame.getInsects().forEach((insect, index) => {
             if (insect instanceof Queen) {
                 let beeQueen = document.createElement("img");
                 beeQueen.setAttribute("src", "./resources/queen_bee.jpg");
@@ -19,10 +18,9 @@ function initializeBeeGame() {
                 beeQueen.style.height = "200px";
                 beeQueen.style.border = "1px solid black";
                 beeQueen.style.margin = "3px";
-                beeQueen.style.position = "relative"; // Ensure position is not static
+                beeQueen.style.position = "relative";
                 const initialZIndex = getComputedStyle(beeQueen).zIndex;
                 beeQueen.addEventListener("click", (event) => {
-                    attackBee(index);
                     beeQueen.style.zIndex = "2";
                     beeQueen.style.transform = "translate(100px, 100px)";
                     beeQueen.setAttribute("src", "./resources/hurt_queen_bee.jpg");
@@ -52,7 +50,6 @@ function initializeBeeGame() {
                 beeDrone.style.position = "relative"; // Ensure position is not static
                 const initialZIndex = getComputedStyle(beeDrone).zIndex;
                 beeDrone.addEventListener("click", (event) => {
-                    attackBee(index);
                     beeDrone.style.zIndex = "2";
                     beeDrone.style.transform = "translate(100px, 100px)";
                     beeDrone.setAttribute("src", "./resources/hurt_bee.jpg");
@@ -82,7 +79,6 @@ function initializeBeeGame() {
                 beeWorker.style.position = "relative"; // Ensure position is not static
                 const initialZIndex = getComputedStyle(beeWorker).zIndex;
                 beeWorker.addEventListener("click", (event) => {
-                    attackBee(index);
                     beeWorker.style.zIndex = "2";
                     beeWorker.style.transform = "translate(100px, 100px)";
                     beeWorker.setAttribute("src", "./resources/hurt_bee.jpg");
@@ -103,22 +99,19 @@ function initializeBeeGame() {
         });
     }
     else {
-        console.error("The html element has not been found.");
-    }
-}
-function attackBee(beeIndex) {
-    let attackedInsect = beeGame
-        .getInsects()
-        .find((insect, index) => beeIndex === index);
-    if (attackedInsect) {
-        console.log("Attacked Insect: ", attackedInsect);
-        attackedInsect.takeDamage();
-        console.log("Attacked Insect: ", attackedInsect);
+        throw new Error("The html element has not been found.");
     }
 }
 function attackSwarm() {
-    beeGame.attackBee();
+    const randomBeeIndex = beeGame.getRandomBeeIndex();
+    beeGame.attackBee(randomBeeIndex);
+    const beeReference = document.querySelector(`[beeIndex="${randomBeeIndex}"]`);
+    if (beeReference) {
+        beeReference.click();
+    }
+    else {
+        throw new Error(`Bee with index ${randomBeeIndex} not found in the DOM`);
+    }
 }
-document.querySelector("button")?.addEventListener("click", attackSwarm);
 //Observatie: De facut o albina sa se incarce cum avem pe shopfloor pentru window.load event
 // Ca sa fie foarte smeher

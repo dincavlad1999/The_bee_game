@@ -72,15 +72,14 @@ export class BeeGame {
     }
   }
 
-  private getRandomBeeIndex(): number {
+  public getRandomBeeIndex(): number {
     if (this.insects.length === 0) {
       return -1;
     }
     return Math.floor(Math.random() * this.insects.length);
   }
 
-  public attackBee(): void {
-    let randomBeeIndex: number = this.getRandomBeeIndex();
+  public attackBee(randomBeeIndex: number): void {
     let attackedBee: Insect | undefined = this.insects.find(
       (insect: Insect, beeIndex: number) => {
         return beeIndex === randomBeeIndex;
