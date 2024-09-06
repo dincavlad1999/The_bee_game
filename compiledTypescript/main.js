@@ -160,7 +160,7 @@ function attackSwarm() {
             if (isAttackedBeeKilled) {
                 setTimeout(() => {
                     initializeBeeGame();
-                }, 3000);
+                }, 5000);
             }
         }
         else {

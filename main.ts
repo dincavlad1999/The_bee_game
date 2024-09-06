@@ -173,7 +173,7 @@ function attackSwarm(): void {
         if (isAttackedBeeKilled) {
           setTimeout(() => {
             initializeBeeGame();
-          }, 3000);
+          }, 5000);
         }
       } else {
         console.error(`Bee with index ${randomBeeIndex} not found in the DOM`);
