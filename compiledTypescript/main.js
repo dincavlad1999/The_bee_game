@@ -106,11 +106,6 @@ function initializeHive() {
         console.error("The html element has not been found.");
     }
 }
-function hitTheHive() {
-    console.log(hive.isGameOver());
-    console.log(hive.getInsects());
-    console.log("Sunt in Main.");
-}
 function attackBee(beeIndex) {
     let attackedInsect = hive
         .getInsects()
@@ -121,6 +116,9 @@ function attackBee(beeIndex) {
         console.log("Attacked Insect: ", attackedInsect);
     }
 }
-document.querySelector("button")?.addEventListener("click", hitTheHive);
+function attackSwarm() {
+    hive.attackBee();
+}
+document.querySelector("button")?.addEventListener("click", attackSwarm);
 //Observatie: De facut o albina sa se incarce cum avem pe shopfloor pentru window.load event
 // Ca sa fie foarte smeher

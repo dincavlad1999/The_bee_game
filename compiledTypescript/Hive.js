@@ -59,4 +59,32 @@ export class Hive {
                 throw new Error("Invalid insect type");
         }
     }
+    getRandomBeeIndex() {
+        if (this.insects.length === 0) {
+            return -1;
+        }
+        return Math.floor(Math.random() * this.insects.length);
+    }
+    attackBee() {
+        let randomBeeIndex = this.getRandomBeeIndex();
+        let attackedBee = this.insects.find((insect, beeIndex) => {
+            return beeIndex === randomBeeIndex;
+        });
+        if (attackedBee) {
+            console.log("Attacked Bee before damage hp: ", attackedBee.getHealth());
+            attackedBee.takeDamage();
+            console.log("Attacked Bee after damage hp: ", attackedBee.getHealth());
+            if (this.isGameOver()) {
+                alert("Game Over");
+                this.initializeHiveSwarm();
+            }
+            else {
+                //Update the insects
+                this.insects = this.insects.filter((insect) => insect.getHealth() > 0);
+            }
+        }
+        else {
+            throw new Error("No bee with the generated index found.");
+        }
+    }
 }

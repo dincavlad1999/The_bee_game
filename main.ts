@@ -110,12 +110,6 @@ function initializeHive(): void {
   }
 }
 
-function hitTheHive(): void {
-  console.log(hive.isGameOver());
-  console.log(hive.getInsects());
-  console.log("Sunt in Main.");
-}
-
 function attackBee(beeIndex: number): void {
   let attackedInsect: Insect | undefined = hive
     .getInsects()
@@ -127,7 +121,10 @@ function attackBee(beeIndex: number): void {
   }
 }
 
-document.querySelector("button")?.addEventListener("click", hitTheHive);
+function attackSwarm(): void {
+  hive.attackBee();
+}
+document.querySelector("button")?.addEventListener("click", attackSwarm);
 
 //Observatie: De facut o albina sa se incarce cum avem pe shopfloor pentru window.load event
 // Ca sa fie foarte smeher
