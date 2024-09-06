@@ -70,4 +70,11 @@ export class Hive {
         throw new Error("Invalid insect type");
     }
   }
+
+  private getRandomBee(): number {
+    if (this.insects.length === 0) {
+      return -1;
+    }
+    return Math.floor(Math.random() * length);
+  }
 }
