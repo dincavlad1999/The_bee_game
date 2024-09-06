@@ -9,6 +9,7 @@ export class Hive {
   private static instance: Hive | null = null;
 
   private constructor() {
+    //Aici o sa initializez din Session storage daca este cazul sau daca nu apelez functia asta.
     this.initializeHiveSwarm();
   }
 
@@ -93,7 +94,7 @@ export class Hive {
         alert("Game Over");
         this.initializeHiveSwarm();
       } else {
-        //Update the insects
+        //Update the insects and Session Storage etc
         this.insects = this.insects.filter(
           (insect: Insect) => insect.getHealth() > 0
         );
