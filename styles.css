@@ -1,8 +1,15 @@
+body {
+  background: radial-gradient(rgb(244, 195, 0), transparent)
+}
+
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 100px;
+  margin: 0;
+  padding: 0;
   }
 
   .col {
@@ -10,16 +17,78 @@
   }
   
   button {
-    background-color: #d7e90c; /* Green */
-    color: red;
+    background-color: rgb(244, 195, 0);
+    color: rgb(0, 0, 0);
     width: 200px;
     height: auto;
     padding: 15px 32px;
     font-size: 16px;
     cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+  }
+
+  button:hover {
+    background-color: rgb(255, 205, 0); 
+    transform: scale(1.05); 
   }
 
   #hive-container {
     text-align: center;
   }
 
+h2 {
+  text-align: center;
+}
+  
+  ul {
+    list-style-type: none;
+  }
+
+  figure {
+    margin: 10px;
+  }
+
+
+/* Loading Screen style */
+
+#loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(244, 195, 0,1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Above everything */
+  transition: opacity 1s ease-out;
+}
+
+#flyingBee {
+  position: relative;
+  width: 100px;
+  animation: flyAcross 3s ease-in-out infinite;
+}
+
+@keyframes flyAcross {
+  0% {
+      left: -50vw;
+      transform: rotate(20deg);
+  }
+  50% {
+      left: 50vw;
+      transform: rotate(-20deg);
+  }
+  100% {
+      left: 100vw;
+      transform: rotate(0deg);
+  }
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}

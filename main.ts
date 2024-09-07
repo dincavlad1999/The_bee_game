@@ -3,16 +3,37 @@ import { BeeGame } from "./BeeGame.js";
 import { Insect } from "./Insect.js";
 import { Queen } from "./Queen.js";
 import { Worker } from "./Worker.js";
+import { SessionStorage } from "./SessionStorage.js";
 
 const beeGame: BeeGame = BeeGame.createBeeGame();
 const hiveContainerReference: HTMLDivElement | null = document.getElementById(
   "hive-container"
 ) as HTMLDivElement | null;
 document.querySelector("button")?.addEventListener("click", attackSwarm);
+var playerName: string | null = null;
 
-initializeBeeGame();
+window.addEventListener("load", () => {
+  const loadingScreen: HTMLDivElement | null = document.getElementById(
+    "loadingScreen"
+  ) as HTMLDivElement | null;
+
+  if (!SessionStorage.retrieveSessionData("playerName")) {
+    playerName = window.prompt("Please enter your nickname: ");
+    SessionStorage.updateSession("playerName", playerName);
+  } else {
+    playerName = SessionStorage.retrieveSessionData("playerName");
+  }
+
+  setTimeout(() => {
+    loadingScreen!.style.display = "none";
+  }, 5000);
+
+  initializeBeeGame();
+});
 
 function initializeBeeGame(): void {
+  updateStats();
+
   if (hiveContainerReference && hiveContainerReference.hasChildNodes()) {
     while (hiveContainerReference.firstChild) {
       hiveContainerReference.removeChild(hiveContainerReference.firstChild);
@@ -165,6 +186,7 @@ function attackSwarm(): void {
   beeGame
     .attackBee(randomBeeIndex)
     .then((isAttackedBeeKilled: boolean) => {
+      updateStats();
       const beeReference: HTMLImageElement | null = document.querySelector(
         `[beeIndex="${randomBeeIndex}"]`
       ) as HTMLImageElement | null;
@@ -173,7 +195,7 @@ function attackSwarm(): void {
         if (isAttackedBeeKilled) {
           setTimeout(() => {
             initializeBeeGame();
-          }, 5000);
+          }, 3000);
         }
       } else {
         console.error(`Bee with index ${randomBeeIndex} not found in the DOM`);
@@ -184,5 +206,36 @@ function attackSwarm(): void {
     });
 }
 
-//Observatie: De facut o albina sa se incarce cum avem pe shopfloor pentru window.load event
-// Ca sa fie foarte smeher
+function updateStats(): void {
+  const playerNameHeaderElement: HTMLLIElement = document.getElementById(
+    "playerName"
+  ) as HTMLLIElement;
+  const swarmHealth: HTMLLIElement = document.getElementById(
+    "swarmHealth"
+  ) as HTMLLIElement;
+  const aliveBees: HTMLLIElement = document.getElementById(
+    "aliveBees"
+  ) as HTMLLIElement;
+  const aliveQueen: HTMLLIElement = document.getElementById(
+    "aliveQueen"
+  ) as HTMLLIElement;
+  const aliveBeeWorkers: HTMLLIElement = document.getElementById(
+    "aliveBeeWorkers"
+  ) as HTMLLIElement;
+  const aliveBeeDrones: HTMLLIElement = document.getElementById(
+    "aliveBeeDrones"
+  ) as HTMLLIElement;
+
+  playerNameHeaderElement.textContent =
+    "😃Player name: " + (playerName ? playerName : "player");
+  swarmHealth.textContent =
+    "❤️Swarm Health: " + beeGame.getSwarmHealth().toString() + " HP";
+  aliveBees.textContent =
+    "🐝Alive Bees: " + beeGame.getAliveBeesNumber().toString();
+  aliveQueen.textContent =
+    "👑 Queen Alive: " + (beeGame.isBeeQueenAlive() ? "yes" : "no");
+  aliveBeeWorkers.textContent =
+    "🛠️ Workers:" + beeGame.getAliveBeeWorkerNumber().toString();
+  aliveBeeDrones.textContent =
+    "🚁 Drones: " + beeGame.getAliveBeeDroneNumber().toString();
+}

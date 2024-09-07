@@ -121,7 +121,6 @@ export class BeeGame {
           this.initializeBeeGameSwarm();
           resolve(isAttackedBeeKilled);
         } else {
-          //Update the insects and Session Storage etc
           if (isAttackedBeeKilled) {
             this.insects = this.insects.filter(
               (insect: Insect) => insect.getHealth() > 0
@@ -134,5 +133,49 @@ export class BeeGame {
         reject(new Error("No bee with the generated index found."));
       }
     });
+  }
+
+  //Detailed Swarm Data
+
+  public getSwarmHealth(): number {
+    let swarmHealth: number = 0;
+    this.getInsects().forEach((insect: Insect) => {
+      swarmHealth += insect.getHealth();
+    });
+    return swarmHealth;
+  }
+
+  public getAliveBeeWorkerNumber(): number {
+    let aliveBeeWorkers: number = 0;
+    this.getInsects().forEach((insect: Insect) => {
+      if (insect.getType() === "Worker" && insect.getHealth() > 0) {
+        aliveBeeWorkers++;
+      }
+    });
+    return aliveBeeWorkers;
+  }
+
+  public getAliveBeeDroneNumber(): number {
+    let aliveBeeDrone: number = 0;
+    this.getInsects().forEach((insect: Insect) => {
+      if (insect.getType() === "Drone" && insect.getHealth() > 0) {
+        aliveBeeDrone++;
+      }
+    });
+    return aliveBeeDrone;
+  }
+
+  public isBeeQueenAlive(): boolean {
+    let isBeeQueenAlive: boolean = true;
+    this.getInsects().forEach((insect: Insect) => {
+      if (insect.getType() === "Queen" && insect.getHealth() < 0) {
+        isBeeQueenAlive = false;
+      }
+    });
+    return isBeeQueenAlive;
+  }
+
+  public getAliveBeesNumber(): number {
+    return this.getInsects().length;
   }
 }

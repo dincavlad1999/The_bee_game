@@ -11,19 +11,34 @@
 </head>
 
 <body>
+    <div id="loadingScreen">
+        <img id="flyingBee" src="resources/bee_favicon.png" alt="Bee flying" />
+        <h3>Bees are gathering... 🐝</h3>
+    </div>
     <div class="container">
         <div class="col">
-            <h1>The bee game</h1>
+            <h1>The bee game <img src="resources/bee_favicon.png" alt="Bee flying" /></h1>
         </div>
         <div class="col">
-            <h1 style="text-align: center;">Hive</h1>
             <div id="hive-container">
 
             </div>
-
         </div>
         <div class="col">
-            <button type="button">HIT</button>
+            <div>
+                <h2>🔭Stats</h2>
+                <ul>
+                    <li id="playerName"></li>
+                    <li id="swarmHealth"></li>
+                    <li id="aliveBees"></li>
+                    <li id="aliveQueen"></li>
+                    <li id="aliveBeeWorkers"></li>
+                    <li id="aliveBeeDrones"></li>
+                </ul>
+            </div>
+            <div>
+                <button type="button">HIT</button>
+            </div>
         </div>
     </div>
     <script type="module" src="./compiledTypescript/main.js"></script>

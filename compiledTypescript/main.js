@@ -1,9 +1,25 @@
 import { BeeGame } from "./BeeGame.js";
+import { SessionStorage } from "./SessionStorage.js";
 const beeGame = BeeGame.createBeeGame();
 const hiveContainerReference = document.getElementById("hive-container");
 document.querySelector("button")?.addEventListener("click", attackSwarm);
-initializeBeeGame();
+var playerName = null;
+window.addEventListener("load", () => {
+    const loadingScreen = document.getElementById("loadingScreen");
+    if (!SessionStorage.retrieveSessionData("playerName")) {
+        playerName = window.prompt("Please enter your nickname: ");
+        SessionStorage.updateSession("playerName", playerName);
+    }
+    else {
+        playerName = SessionStorage.retrieveSessionData("playerName");
+    }
+    setTimeout(() => {
+        loadingScreen.style.display = "none";
+    }, 5000);
+    initializeBeeGame();
+});
 function initializeBeeGame() {
+    updateStats();
     if (hiveContainerReference && hiveContainerReference.hasChildNodes()) {
         while (hiveContainerReference.firstChild) {
             hiveContainerReference.removeChild(hiveContainerReference.firstChild);
@@ -151,13 +167,14 @@ function attackSwarm() {
     beeGame
         .attackBee(randomBeeIndex)
         .then((isAttackedBeeKilled) => {
+        updateStats();
         const beeReference = document.querySelector(`[beeIndex="${randomBeeIndex}"]`);
         if (beeReference) {
             beeReference.click();
             if (isAttackedBeeKilled) {
                 setTimeout(() => {
                     initializeBeeGame();
-                }, 5000);
+                }, 3000);
             }
         }
         else {
@@ -168,5 +185,23 @@ function attackSwarm() {
         console.error("Error in attackBee:", error);
     });
 }
-//Observatie: De facut o albina sa se incarce cum avem pe shopfloor pentru window.load event
-// Ca sa fie foarte smeher
+function updateStats() {
+    const playerNameHeaderElement = document.getElementById("playerName");
+    const swarmHealth = document.getElementById("swarmHealth");
+    const aliveBees = document.getElementById("aliveBees");
+    const aliveQueen = document.getElementById("aliveQueen");
+    const aliveBeeWorkers = document.getElementById("aliveBeeWorkers");
+    const aliveBeeDrones = document.getElementById("aliveBeeDrones");
+    playerNameHeaderElement.textContent =
+        "😃Player name: " + (playerName ? playerName : "player");
+    swarmHealth.textContent =
+        "❤️Swarm Health: " + beeGame.getSwarmHealth().toString() + " HP";
+    aliveBees.textContent =
+        "🐝Alive Bees: " + beeGame.getAliveBeesNumber().toString();
+    aliveQueen.textContent =
+        "👑 Queen Alive: " + (beeGame.isBeeQueenAlive() ? "yes" : "no");
+    aliveBeeWorkers.textContent =
+        "🛠️ Workers:" + beeGame.getAliveBeeWorkerNumber().toString();
+    aliveBeeDrones.textContent =
+        "🚁 Drones: " + beeGame.getAliveBeeDroneNumber().toString();
+}
