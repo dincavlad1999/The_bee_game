@@ -21,7 +21,7 @@ function initializeBeeGame(): void {
 
   if (hiveContainerReference) {
     beeGame.getInsects().forEach((insect: Insect, index: number) => {
-      if (insect instanceof Queen) {
+      if (insect.getType() === "Queen") {
         let beeQueenFigure: HTMLElement = document.createElement("figure");
         beeQueenFigure.style.textAlign = "center";
         beeQueenFigure.style.display = "inline-block";
@@ -65,7 +65,7 @@ function initializeBeeGame(): void {
         beeQueenFigure.appendChild(beeQueenImage);
         beeQueenFigure.appendChild(beeQueenFigcaption);
         hiveContainerReference.appendChild(beeQueenFigure);
-      } else if (insect instanceof Drone) {
+      } else if (insect.getType() === "Drone") {
         let beeDroneFigure: HTMLElement = document.createElement("figure");
         beeDroneFigure.style.textAlign = "center";
         beeDroneFigure.style.display = "inline-block";
@@ -109,7 +109,7 @@ function initializeBeeGame(): void {
         beeDroneFigure.appendChild(beeDroneImage);
         beeDroneFigure.appendChild(beeDroneFigcaption);
         hiveContainerReference.appendChild(beeDroneFigure);
-      } else if (insect instanceof Worker) {
+      } else if (insect.getType() === "Worker") {
         let beeWorkerFigure: HTMLElement = document.createElement("figure");
         beeWorkerFigure.style.textAlign = "center";
         beeWorkerFigure.style.display = "inline-block";

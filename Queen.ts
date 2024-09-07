@@ -2,7 +2,7 @@ import { Insect } from "./Insect.js";
 
 export class Queen extends Insect {
   constructor() {
-    super(100);
+    super("Queen", 100);
   }
 
   takeDamage(): void {

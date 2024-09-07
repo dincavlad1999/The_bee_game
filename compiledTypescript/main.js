@@ -1,7 +1,4 @@
-import { Drone } from "./Drone.js";
 import { BeeGame } from "./BeeGame.js";
-import { Queen } from "./Queen.js";
-import { Worker } from "./Worker.js";
 const beeGame = BeeGame.createBeeGame();
 const hiveContainerReference = document.getElementById("hive-container");
 document.querySelector("button")?.addEventListener("click", attackSwarm);
@@ -14,7 +11,7 @@ function initializeBeeGame() {
     }
     if (hiveContainerReference) {
         beeGame.getInsects().forEach((insect, index) => {
-            if (insect instanceof Queen) {
+            if (insect.getType() === "Queen") {
                 let beeQueenFigure = document.createElement("figure");
                 beeQueenFigure.style.textAlign = "center";
                 beeQueenFigure.style.display = "inline-block";
@@ -57,7 +54,7 @@ function initializeBeeGame() {
                 beeQueenFigure.appendChild(beeQueenFigcaption);
                 hiveContainerReference.appendChild(beeQueenFigure);
             }
-            else if (insect instanceof Drone) {
+            else if (insect.getType() === "Drone") {
                 let beeDroneFigure = document.createElement("figure");
                 beeDroneFigure.style.textAlign = "center";
                 beeDroneFigure.style.display = "inline-block";
@@ -100,7 +97,7 @@ function initializeBeeGame() {
                 beeDroneFigure.appendChild(beeDroneFigcaption);
                 hiveContainerReference.appendChild(beeDroneFigure);
             }
-            else if (insect instanceof Worker) {
+            else if (insect.getType() === "Worker") {
                 let beeWorkerFigure = document.createElement("figure");
                 beeWorkerFigure.style.textAlign = "center";
                 beeWorkerFigure.style.display = "inline-block";
