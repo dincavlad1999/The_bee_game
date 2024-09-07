@@ -35,6 +35,7 @@ body {
 
   #hive-container {
     text-align: center;
+    pointer-events: none;
   }
 
 h2 {
