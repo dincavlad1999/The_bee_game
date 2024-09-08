@@ -116,8 +116,8 @@ figcaption {
 
 @media  screen and (width <= 576px){
   img[beeIndex] {
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
   }
 
   figcaption {
@@ -137,8 +137,8 @@ figcaption {
 
 @media  screen and (width > 576px) and (width <= 768px){
   img[beeIndex] {
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
   }
 
   figcaption {
@@ -157,7 +157,7 @@ figcaption {
 @media  screen and (width > 768px) and (width <= 992px){
   img[beeIndex] {
     width: 100px;
-    height: 75px;
+    height: 100px;
   }
 
   figcaption {
