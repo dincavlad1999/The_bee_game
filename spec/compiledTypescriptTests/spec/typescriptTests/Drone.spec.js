@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Drone_js_1 = require("../../compiledTypescript/Drone.js"); //Must reference to already compiled JS in order to avoid the creation of the typescript directory
-var Insect_js_1 = require("../../compiledTypescript/Insect.js");
+var Drone_js_1 = require("../../typescript/Drone.js"); //Must reference to already compiled JS in order to avoid the creation of the typescript directory
+var Insect_js_1 = require("../../typescript/Insect.js");
 describe("Drone", function () {
     var drone;
     beforeEach(function () {
