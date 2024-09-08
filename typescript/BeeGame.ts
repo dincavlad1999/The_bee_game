@@ -6,14 +6,17 @@ import { Worker } from "./Worker.js";
 import { SessionStorage } from "./SessionStorage.js";
 
 const sessionStorageKey: string = "swarmMembers";
+const sessionStorageKeyKilled: string = "killedInsects";
 
 export class BeeGame {
   private insects: Insect[] = [];
   private static instance: BeeGame | null = null;
+  private killedInsects: Insect[] = [];
 
   private constructor() {
     //Aici o sa initializez din Session storage daca este cazul sau daca nu apelez functia asta.
     this.initializeBeeGameSwarm();
+    this.loadKilledInsects();
   }
 
   public static createBeeGame() {
@@ -25,6 +28,34 @@ export class BeeGame {
 
   public getInsects(): Insect[] {
     return this.insects;
+  }
+
+  public getKilledInsectsNumber(): number {
+    return this.killedInsects.length;
+  }
+
+  public getKilledDronesNumber(): number {
+    let killedDrones: number = 0;
+    if (this.killedInsects.length) {
+      this.killedInsects.forEach((insect: Insect) => {
+        if (insect instanceof Drone) {
+          killedDrones++;
+        }
+      });
+    }
+    return killedDrones;
+  }
+
+  public getKilledWorkersNumber(): number {
+    let killedWorkers: number = 0;
+    if (this.killedInsects.length) {
+      this.killedInsects.forEach((insect: Insect) => {
+        if (insect instanceof Worker) {
+          killedWorkers++;
+        }
+      });
+    }
+    return killedWorkers;
   }
 
   private initializeBeeGameSwarm(): void {
@@ -61,6 +92,22 @@ export class BeeGame {
         return null;
       });
     }
+  }
+
+  private loadKilledInsects(): void {
+    const killedInsectsArray: { type: string; healthPoints: string }[] =
+      SessionStorage.retrieveSessionData(sessionStorageKeyKilled) || [];
+    // Manually rehydrate data to their respective classes
+    this.killedInsects = killedInsectsArray.map((insectData: any) => {
+      if (insectData.type === "Queen") {
+        return Object.assign(new Queen(), insectData);
+      } else if (insectData.type === "Drone") {
+        return Object.assign(new Drone(), insectData);
+      } else if (insectData.type === "Worker") {
+        return Object.assign(new Worker(), insectData);
+      }
+      return null;
+    });
   }
 
   public isGameOver(): boolean {
@@ -111,12 +158,20 @@ export class BeeGame {
       );
       if (attackedBee) {
         attackedBee.takeDamage();
+        if (attackedBee.getHealth() <= 0) {
+          this.killedInsects = [...this.killedInsects, attackedBee];
+          SessionStorage.updateSession(
+            sessionStorageKeyKilled,
+            this.killedInsects
+          );
+        }
         let isAttackedBeeKilled: boolean =
           attackedBee.getHealth() < 0 ? true : false;
         if (this.isGameOver()) {
           alert("Game Over");
           SessionStorage.clearSessionData();
           this.initializeBeeGameSwarm();
+          this.loadKilledInsects();
           resolve(isAttackedBeeKilled);
         } else {
           if (isAttackedBeeKilled) {

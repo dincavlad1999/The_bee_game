@@ -189,19 +189,31 @@ function updateStats() {
     const playerNameHeaderElement = document.getElementById("playerName");
     const swarmHealth = document.getElementById("swarmHealth");
     const aliveBees = document.getElementById("aliveBees");
+    const killedBees = document.getElementById("killedBees");
     const aliveQueen = document.getElementById("aliveQueen");
     const aliveBeeWorkers = document.getElementById("aliveBeeWorkers");
+    const killedBeeWorkers = document.getElementById("killedBeeWorkers");
     const aliveBeeDrones = document.getElementById("aliveBeeDrones");
+    const killedBeeDrones = document.getElementById("killedBeeDrones");
     playerNameHeaderElement.textContent =
         "😃Player name: " + (playerName ? playerName : "player");
     swarmHealth.textContent =
         "❤️Swarm Health: " + beeGame.getSwarmHealth().toString() + " HP";
     aliveBees.textContent =
         "🐝Alive Bees: " + beeGame.getAliveBeesNumber().toString();
+    killedBees.textContent =
+        "💀Dead Bees: " +
+            (beeGame.getKilledInsectsNumber() > 0
+                ? beeGame.getKilledInsectsNumber().toString()
+                : "0");
     aliveQueen.textContent =
-        "👑 Queen Alive: " + (beeGame.isBeeQueenAlive() ? "yes" : "no");
+        "👑Queen Alive: " + (beeGame.isBeeQueenAlive() ? "yes" : "no");
     aliveBeeWorkers.textContent =
-        "🛠️ Workers:" + beeGame.getAliveBeeWorkerNumber().toString();
+        "🛠️Alive Workers:" + beeGame.getAliveBeeWorkerNumber().toString();
+    killedBeeWorkers.textContent =
+        "💀🛠️Killed Workers: " + beeGame.getKilledWorkersNumber();
     aliveBeeDrones.textContent =
-        "🚁 Drones: " + beeGame.getAliveBeeDroneNumber().toString();
+        "🚁Alive Drones: " + beeGame.getAliveBeeDroneNumber().toString();
+    killedBeeDrones.textContent =
+        "💀🚁 Killed Drones: " + beeGame.getKilledDronesNumber();
 }

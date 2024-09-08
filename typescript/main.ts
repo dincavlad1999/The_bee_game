@@ -216,26 +216,52 @@ function updateStats(): void {
   const aliveBees: HTMLLIElement = document.getElementById(
     "aliveBees"
   ) as HTMLLIElement;
+  const killedBees: HTMLLIElement = document.getElementById(
+    "killedBees"
+  ) as HTMLLIElement;
   const aliveQueen: HTMLLIElement = document.getElementById(
     "aliveQueen"
   ) as HTMLLIElement;
   const aliveBeeWorkers: HTMLLIElement = document.getElementById(
     "aliveBeeWorkers"
   ) as HTMLLIElement;
+  const killedBeeWorkers: HTMLLIElement = document.getElementById(
+    "killedBeeWorkers"
+  ) as HTMLLIElement;
   const aliveBeeDrones: HTMLLIElement = document.getElementById(
     "aliveBeeDrones"
+  ) as HTMLLIElement;
+  const killedBeeDrones: HTMLLIElement = document.getElementById(
+    "killedBeeDrones"
   ) as HTMLLIElement;
 
   playerNameHeaderElement.textContent =
     "😃Player name: " + (playerName ? playerName : "player");
+
   swarmHealth.textContent =
     "❤️Swarm Health: " + beeGame.getSwarmHealth().toString() + " HP";
+
   aliveBees.textContent =
     "🐝Alive Bees: " + beeGame.getAliveBeesNumber().toString();
+
+  killedBees.textContent =
+    "💀Dead Bees: " +
+    (beeGame.getKilledInsectsNumber() > 0
+      ? beeGame.getKilledInsectsNumber().toString()
+      : "0");
+
   aliveQueen.textContent =
-    "👑 Queen Alive: " + (beeGame.isBeeQueenAlive() ? "yes" : "no");
+    "👑Queen Alive: " + (beeGame.isBeeQueenAlive() ? "yes" : "no");
+
   aliveBeeWorkers.textContent =
-    "🛠️ Workers:" + beeGame.getAliveBeeWorkerNumber().toString();
+    "🛠️Alive Workers:" + beeGame.getAliveBeeWorkerNumber().toString();
+
+  killedBeeWorkers.textContent =
+    "💀🛠️Killed Workers: " + beeGame.getKilledWorkersNumber();
+
   aliveBeeDrones.textContent =
-    "🚁 Drones: " + beeGame.getAliveBeeDroneNumber().toString();
+    "🚁Alive Drones: " + beeGame.getAliveBeeDroneNumber().toString();
+
+  killedBeeDrones.textContent =
+    "💀🚁 Killed Drones: " + beeGame.getKilledDronesNumber();
 }
