@@ -1,9 +1,9 @@
-import { Drone } from "./Drone.js";
-import { BeeGame } from "./BeeGame.js";
-import { Insect } from "./Insect.js";
-import { Queen } from "./Queen.js";
-import { Worker } from "./Worker.js";
-import { SessionStorage } from "./SessionStorage.js";
+import { Drone } from "./Drone";
+import { BeeGame } from "./BeeGame";
+import { Insect } from "./Insect";
+import { Queen } from "./Queen";
+import { Worker } from "./Worker";
+import { SessionStorage } from "./SessionStorage";
 
 const beeGame: BeeGame = BeeGame.createBeeGame();
 const hiveContainerReference: HTMLDivElement | null = document.getElementById(

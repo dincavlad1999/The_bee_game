@@ -1,5 +1,5 @@
-import { BeeGame } from "./BeeGame.js";
-import { SessionStorage } from "./SessionStorage.js";
+import { BeeGame } from "./BeeGame";
+import { SessionStorage } from "./SessionStorage";
 const beeGame = BeeGame.createBeeGame();
 const hiveContainerReference = document.getElementById("hive-container");
 document.querySelector("button")?.addEventListener("click", attackSwarm);

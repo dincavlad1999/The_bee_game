@@ -1,8 +1,8 @@
-import { Drone } from "./Drone.js";
-import { InsectType } from "./InsectType.js";
-import { Queen } from "./Queen.js";
-import { Worker } from "./Worker.js";
-import { SessionStorage } from "./SessionStorage.js";
+import { Drone } from "./Drone";
+import { InsectType } from "./InsectType";
+import { Queen } from "./Queen";
+import { Worker } from "./Worker";
+import { SessionStorage } from "./SessionStorage";
 const sessionStorageKey = "swarmMembers";
 export class BeeGame {
     insects = [];
@@ -96,10 +96,8 @@ export class BeeGame {
                 return beeIndex === randomBeeIndex;
             });
             if (attackedBee) {
-                console.log("Attacked Bee before damage hp: ", attackedBee.getHealth());
                 attackedBee.takeDamage();
                 let isAttackedBeeKilled = attackedBee.getHealth() < 0 ? true : false;
-                console.log("Attacked Bee after damage hp: ", attackedBee.getHealth());
                 if (this.isGameOver()) {
                     alert("Game Over");
                     SessionStorage.clearSessionData();
