@@ -1,5 +1,5 @@
-import { Drone } from "../../typescript/Drone.js";
-import { Insect } from "../../typescript/Insect.js";
+import { Drone } from "../../compiledTypescript/Drone.js"; //Must reference to already compiled JS in order to avoid the creation of the typescript directory
+import { Insect } from "../../compiledTypescript/Insect.js";
 
 describe("Drone", () => {
   let drone: Drone;
