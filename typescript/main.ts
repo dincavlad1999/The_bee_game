@@ -53,8 +53,8 @@ function initializeBeeGame(): void {
         beeQueenImage.setAttribute("src", "./resources/queen_bee.jpg");
         beeQueenImage.setAttribute("beeIndex", `${index}`);
         beeQueenImage.style.cursor = "pointer";
-        beeQueenImage.style.width = "100px";
-        beeQueenImage.style.height = "100px";
+        // beeQueenImage.style.width = "100px";
+        // beeQueenImage.style.height = "100px";
 
         beeQueenImage.style.margin = "3px";
         beeQueenImage.style.position = "relative";
@@ -97,8 +97,8 @@ function initializeBeeGame(): void {
         beeDroneImage.setAttribute("src", "./resources/drone_bee.jpg");
         beeDroneImage.setAttribute("beeIndex", `${index}`);
         beeDroneImage.style.cursor = "pointer";
-        beeDroneImage.style.width = "100px";
-        beeDroneImage.style.height = "100px";
+        // beeDroneImage.style.width = "100px";
+        // beeDroneImage.style.height = "100px";
 
         beeDroneImage.style.margin = "3px";
         beeDroneImage.style.position = "relative"; // Ensure position is not static
@@ -141,8 +141,8 @@ function initializeBeeGame(): void {
         beeWorkerImage.setAttribute("src", "resources/worker_bee.jpg");
         beeWorkerImage.setAttribute("beeIndex", `${index}`);
         beeWorkerImage.style.cursor = "pointer";
-        beeWorkerImage.style.width = "100px";
-        beeWorkerImage.style.height = "100px";
+        // beeWorkerImage.style.width = "100px";
+        // beeWorkerImage.style.height = "100px";
 
         beeWorkerImage.style.margin = "3px";
         beeWorkerImage.style.position = "relative"; // Ensure position is not static
