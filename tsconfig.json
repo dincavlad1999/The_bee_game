@@ -11,8 +11,9 @@
       "allowJs": true,
       "resolveJsonModule": true,
       "isolatedModules": true,
-      "outDir": "./compiledTypescript"  // Add this line to specify where the compiled JS will go
+      "outDir": "./compiledTypescript"
     },
-    "include": ["*.ts"],
+  "include": ["typescript/*.ts"],   
+  "exclude": ["node_modules", "compiledTypescript"]
   }
   
