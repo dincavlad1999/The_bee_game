@@ -1,0 +1,19 @@
+{
+  "name": "the-bee-game",
+  "version": "1.0.0",
+  "description": "The game is over when all the bees are killed by clicking the hit button.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dincavlad1999/The_bee_game.git"
+  },
+  "author": "Dinca Vlad-Alexandru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dincavlad1999/The_bee_game/issues"
+  },
+  "homepage": "https://github.com/dincavlad1999/The_bee_game#readme"
+}
