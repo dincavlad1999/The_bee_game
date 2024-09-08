@@ -1,4 +1,4 @@
-import { Insect } from "./Insect";
+import { Insect } from "./Insect.js";
 
 export class Drone extends Insect {
   constructor() {

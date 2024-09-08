@@ -1,9 +1,9 @@
-import { Drone } from "./Drone";
-import { Insect } from "./Insect";
-import { InsectType } from "./InsectType";
-import { Queen } from "./Queen";
-import { Worker } from "./Worker";
-import { SessionStorage } from "./SessionStorage";
+import { Drone } from "./Drone.js";
+import { Insect } from "./Insect.js";
+import { InsectType } from "./InsectType.js";
+import { Queen } from "./Queen.js";
+import { Worker } from "./Worker.js";
+import { SessionStorage } from "./SessionStorage.js";
 
 const sessionStorageKey: string = "swarmMembers";
 

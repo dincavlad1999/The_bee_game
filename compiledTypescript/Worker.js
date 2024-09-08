@@ -1,4 +1,4 @@
-import { Insect } from "./Insect";
+import { Insect } from "./Insect.js";
 export class Worker extends Insect {
     constructor() {
         super("Worker", 75);
