@@ -11,6 +11,11 @@ export abstract class Insect {
     return this.healthPoints;
   }
 
+  //Created for testing purposes
+  setHealth(hp: number): void {
+    this.healthPoints = hp;
+  }
+
   getType(): string {
     return this.type;
   }

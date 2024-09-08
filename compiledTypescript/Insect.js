@@ -8,6 +8,10 @@ export class Insect {
     getHealth() {
         return this.healthPoints;
     }
+    //Created for testing purposes
+    setHealth(hp) {
+        this.healthPoints = hp;
+    }
     getType() {
         return this.type;
     }

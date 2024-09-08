@@ -9,6 +9,10 @@ var Insect = /** @class */ (function () {
     Insect.prototype.getHealth = function () {
         return this.healthPoints;
     };
+    //Created for testing purposes
+    Insect.prototype.setHealth = function (hp) {
+        this.healthPoints = hp;
+    };
     Insect.prototype.getType = function () {
         return this.type;
     };

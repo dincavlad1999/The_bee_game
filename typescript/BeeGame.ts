@@ -68,7 +68,7 @@ export class BeeGame {
     return false;
   }
 
-  private isQueenDead(): boolean {
+  public isQueenDead(): boolean {
     let queen: Queen | undefined = this.insects.find((insect: Insect) => {
       return insect instanceof Queen;
     });
@@ -78,7 +78,7 @@ export class BeeGame {
     return false;
   }
 
-  private isSomeBeeAlive(): boolean {
+  public isSomeBeeAlive(): boolean {
     return this.insects.some((bee: Insect) => bee && bee.getHealth() > 0);
   }
 
