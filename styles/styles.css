@@ -135,8 +135,8 @@ figcaption {
 
 @media  screen and (width > 576px) and (width <= 768px){
   img[beeIndex] {
-    width: 75px;
-    height: 75px;
+    width: 55px;
+    height: 30px;
   }
 
   figcaption {
@@ -155,26 +155,7 @@ figcaption {
 @media  screen and (width > 768px) and (width <= 992px){
   img[beeIndex] {
     width: 100px;
-    height: 100px;
-  }
-
-  figcaption {
-    font-size: small;
-  }
-
-  ul {
-    font-size: small;
-  }
-
-  h2 {
-    font-size: large;
-  }
-}
-
-@media  screen and (width > 992px) and (width <= 1200px){
-  img[beeIndex] {
-    width: 150px;
-    height: 100px;
+    height: 50px;
   }
 
   figcaption {
@@ -190,10 +171,29 @@ figcaption {
   }
 }
 
-@media  screen and (width > 1200px) {
+@media  screen and (width > 992px) and (width <= 1200px){
+  img[beeIndex] {
+    width: 100px;
+    height: 50px;
+  }
+
+  figcaption {
+    font-size: large;
+  }
+
+  ul {
+    font-size: large;
+  }
+
+  h2 {
+    font-size: x-large;
+  }
+}
+
+@media  screen and (width > 1200px) and (width <= 1700px){
   img[beeIndex] {
     width: 125px;
-    height: 125px;
+    height: 100px;
 
   figcaption {
     font-size: large;
@@ -207,3 +207,21 @@ figcaption {
     font-size: x-large;
   }
 }}
+
+@media screen and (width > 1700px) {
+  img[beeIndex] {
+    width: 200px;
+    height: 150px;
+  }
+  figcaption {
+    font-size: x-large;
+  }
+
+  ul {
+    font-size: x-large;
+  }
+
+  h2 {
+    font-size: xx-large;
+  }
+}
