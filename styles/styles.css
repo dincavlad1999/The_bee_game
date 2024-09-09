@@ -44,6 +44,7 @@ body {
   #hive-container {
     text-align: center;
     pointer-events: none;
+    min-height: 320px;
   }
 
 h2 {
